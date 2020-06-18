@@ -156,7 +156,7 @@ Note: you can also make these changes with a Kustomize patch in a new overlay
 
 #### Option 2 : your DockerHub repository is private
 
-You will need to create a DockerHub token to allow Minikube pulling images.
+You will need to create a DockerHub token to allow Minikube pulling this images
 - Login to DockerHub website and create a new token in the security settings like we did for GitHub
 - Create a Kubernetes secrets with these credentials in the Kubernetes application namespace
 ```
