@@ -8,4 +8,4 @@ namespace: hello-gitops
 images:
 - name: hello-gitops
   newName: emmsys/hello-gitops
-  newTag: 6bcac28d0bcfc39f8f78d7ca76fac0eff6e629ad
+  newTag: 9b98b6cde920ed99d18e674516ca90eaf1e6f8a9
