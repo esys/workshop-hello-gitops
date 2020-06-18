@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+- service.yaml
+- ingress.yaml
+namespace: hello-gitops
+images:
+- name: emmsys/hello-gitops
+  newTag: baadd7d7832f74e3c6d37b3f07b179d7e86c4017
