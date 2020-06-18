@@ -45,9 +45,11 @@ jobs:
         kustomize-version: "3.6.1"
     
     - name: Update Kubernetes resources
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
        cd kustomize/base
-       kustomize edit set image emmsys/hello-gitops:$GITHUB_SHA
+       kustomize edit set image $DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
        cat kustomization.yaml
         
     - name: Commit files
