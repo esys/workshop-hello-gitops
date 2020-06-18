@@ -46,8 +46,8 @@ minikube addons enable ingress
 
 ## Setup ArgoCD
 
-Refer to the official setup instructions
-
+Refer to the official [setup instructions](https://argoproj.github.io/argo-cd/getting_started/) for a detailed guide.
+To sum it up
 ```
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
@@ -55,7 +55,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 ArgoCD can be interacted with using
 - the web UI
 - the ArgoCD CLI
-- or by editing CRD directly with `kubectl`
+- or by editing the CRD yaml
 
 If you want to install the CLI 
 ```
@@ -80,7 +80,7 @@ Login to your DockerHub account and create a new repository by clicking `Create 
 
 ![](doc/dockerhub.png)
 
-It's easier to make the repository public. If you want to use a private repository (like I did) you will need to allow your Minikube cluster to pull image from this repo by creating a secrets. Procedure is explained later.
+It's easier to make the repository public. If you want to use a private repository (like I did) you will need to allow your Minikube cluster to pull image from this repo by creating a secret. Procedure is explained later.
 
 You will also need to generate a token for use by GitHub by going into your account settings then Security and clicking `New Access Token`
 
@@ -152,7 +152,7 @@ Edit `kustomize/base/deployment.yaml` to remove any reference to an `imagePullSe
               containerPort: 8080
 ```
 
-Note: you can also do the change with a Kustomize patch in a new overlay
+Note: you can also make these changes with a Kustomize patch in a new overlay
 
 #### Option 2 : your DockerHub repository is private
 
