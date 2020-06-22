@@ -63,7 +63,7 @@ brew tap argoproj/tap
 brew install argoproj/tap/argocd 
 ```
 
-For this example, we will use the web UI. This UI can be made accessible using a port forward
+For this example, we will use the web UI. It can be made accessible using a port forward
 ```
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
@@ -99,7 +99,7 @@ git clone https://github.com/<your-username>/hello-gitops.git
 ```
 - Then add the `hello-gitops` repository as upstream
 ```
-cd my-hello-gitops
+cd hello-gitops
 git remote add upstream https://github.com/esys/hello-gitops.git
 ```
 
@@ -121,12 +121,12 @@ You will need to expose your DockerHub credentials as GitHub secrets.
   - Checkout the code
   - Unit test it
   - Build and push the application as a Docker image
-  - Update the Kustomize manifest with the new Docker image tag
+  - Update the Kustomize manifest with the new Docker tag
 
 ### Take a look at Kustomize
 
 Kustomize manifests are in the `kustomize` folder. 
-The `kustomization.yaml` is updated automatically by the GitHub workflow to add a new `images` transformation to set the right image name and tag.
+The `kustomization.yaml` is updated automatically by the GitHub workflow to add a new `images` transformation setting the right image name and tag.
 ```
 images:
 - name: hello-gitops
@@ -134,7 +134,7 @@ images:
   newName: emmsys/hello-gitops
 ```
 
-No need to touch these settings as they are updated automatically.
+No need to touch these settings as they are updated by the workflow.
 
 ### Allow Minikube to pull the Docker image
 
