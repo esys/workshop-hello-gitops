@@ -21,4 +21,4 @@ spec:
             - name: http
               containerPort: 8080
       imagePullSecrets:
-      - name: registry-esys
+      - name: my-registry-creds
