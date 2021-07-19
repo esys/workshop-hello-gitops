@@ -3,9 +3,8 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
-- ingress.yaml
 namespace: hello-gitops
 images:
 - name: hello-gitops
   newName: pkatira7/hello-gitops
-  newTag: bd0b95a1e7e31fd3a30c0a979ffbfc45761b001f
+  newTag: 4d58956af53651623f6303fc24204d8e7f0c9797
