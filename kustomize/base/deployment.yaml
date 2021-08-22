@@ -15,7 +15,7 @@ spec:
         app: hello-gitops
     spec:
       annotations:
-        seccomp.security.alpha.kubernetes.io/pod: "runtime/default"
+        seccomp.security.kubernetes.io/pod: "runtime/default"
       securityContext:
         runAsNonRoot: true
         runAsUser: 10001
