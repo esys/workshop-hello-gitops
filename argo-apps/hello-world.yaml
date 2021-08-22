@@ -6,8 +6,6 @@ metadata:
 spec:
   project: default
   source:
-    kustomize:
-      version: v3.5.4
     repoURL: https://github.com/piyush7/workshop-hello-gitops
     targetRevision: HEAD
     path: kustomize/base
