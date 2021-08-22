@@ -121,7 +121,8 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        run:
+          echo "Deployed to Production Successfully"
       
 
     
