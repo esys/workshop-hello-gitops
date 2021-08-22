@@ -21,24 +21,25 @@ jobs:
     - name: Check Path
       run: echo $PATH 
 
-    # - name: Lint Code Base
-    #   uses: github/super-linter@v4
-    #   env:
-    #       DEFAULT_BRANCH: master
-    #       # VALIDATE_KUBERNETES_KUBEVAL: false
-    #       # VALIDATE_JSCPD: false
-    #       VALIDATE_MARKDOWN: false
-    #       GOENV: "/home/runner/.config/go/env"
-    #       GOROOT: "/opt/hostedtoolcache/go/1.16.7/x64"
+    - name: Lint Code Base
+      uses: github/super-linter@v4
+      env:
+          DEFAULT_BRANCH: master
+          # VALIDATE_KUBERNETES_KUBEVAL: false
+          # VALIDATE_JSCPD: false
+          VALIDATE_MARKDOWN: false
+          VALIDATE_GO: false
+          # GOENV: "/home/runner/.config/go/env"
+          # GOROOT: "/opt/hostedtoolcache/go/1.16.7/x64"
 
-    - name: lint
-      uses: golangci/golangci-lint-action@v2
-      with:
-        skip-go-installation: true
-        github-token: ${{secrets.secret_token}}
-        only-new-issues: false
-        skip-pkg-cache: true
-        skip-build-cache: true
+    # - name: lint
+    #   uses: golangci/golangci-lint-action@v2
+    #   with:
+    #     skip-go-installation: true
+    #     github-token: ${{secrets.secret_token}}
+    #     only-new-issues: false
+    #     skip-pkg-cache: true
+    #     skip-build-cache: true
 
 
     - name: Build and push Docker image
