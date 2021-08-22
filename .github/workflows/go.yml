@@ -25,10 +25,11 @@ jobs:
       uses: github/super-linter@v4
       env:
           DEFAULT_BRANCH: master
-          # VALIDATE_KUBERNETES_KUBEVAL: false
-          # VALIDATE_JSCPD: false
+          VALIDATE_KUBERNETES_KUBEVAL: false
+          #  VALIDATE_JSCPD: false
           VALIDATE_MARKDOWN: false
           VALIDATE_GO: false
+          GITHUB_TOKEN: ${{secrets.secret_token}}
           # GOENV: "/home/runner/.config/go/env"
           # GOROOT: "/opt/hostedtoolcache/go/1.16.7/x64"
 
