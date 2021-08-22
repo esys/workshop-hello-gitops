@@ -35,7 +35,7 @@ jobs:
       uses: golangci/golangci-lint-action@v2
       with:
         skip-go-installation: true
-        github-token: {{secrets.secret_token}}
+        github-token: ${{secrets.secret_token}}
         only-new-issues: false
         skip-pkg-cache: true
         skip-build-cache: true
