@@ -25,6 +25,9 @@ jobs:
           # VALIDATE_KUBERNETES_KUBEVAL: false
           # VALIDATE_JSCPD: false
           VALIDATE_MARKDOWN: false
+          GOENV: "/home/runner/.config/go/env"
+          GOROOT: "/opt/hostedtoolcache/go/1.16.7/x64"
+
         
     - name: Build and push Docker image
       uses: docker/build-push-action@v1.1.0
