@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: hello-gitops
+  namespace: development
   name: hello-gitops
 spec:
   replicas: 1
