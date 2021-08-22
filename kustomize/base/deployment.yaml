@@ -14,11 +14,19 @@ spec:
       labels:
         app: hello-gitops
     spec:
+      seccomp.security.alpha.kubernetes.io/pod: "runtime/default"
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
       containers:
         - image: hello-gitops
           name: hello-gitops
           ports:
             - name: http
               containerPort: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
+
+      automountServiceAccountToken: false
       imagePullSecrets:
       - name: my-registry-creds
