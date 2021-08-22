@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
+<<<<<<< HEAD
 namespace: production
 images:
 - name: hello-gitops
