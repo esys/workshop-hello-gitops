@@ -13,7 +13,6 @@ spec:
     metadata:
       labels:
         app: hello-gitops
-      namespace: development
     spec:
       containers:
         - image: hello-gitops
