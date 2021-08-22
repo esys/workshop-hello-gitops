@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/piyush7/workshop-hello-gitops
-    targetRevision: development
+    targetRevision: HEAD
     path: kustomize/base
   destination:
     server: https://kubernetes.default.svc
