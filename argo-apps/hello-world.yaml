@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: hello-world
-  namespace: default
+  namespace: development
 spec:
   project: default
   source:
