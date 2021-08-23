@@ -62,6 +62,7 @@ jobs:
         secrets: |
           vmware-demo/docker-registry DOCKER_USERNAME | DOCKER_USERNAME ;
           vmware-demo/docker-registry DOCKER_PASSWORD | DOCKER_PASSWORD ;
+        tlsSkipVerify: true
     - name: Check out code
       uses: actions/checkout@v2 
     - name: Build and push Docker image
