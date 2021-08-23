@@ -64,6 +64,11 @@ jobs:
     #       secret/vmware-demo/docker-registry DOCKER_USERNAME | DOCKER_USERNAME ;
     #       secret/vmware-demo/docker-registry DOCKER_PASSWORD | DOCKER_PASSWORD ;
     #     tlsSkipVerify: true
+
+          
+         
+    - name: Check out code
+      uses: actions/checkout@v2 
     - name: Install dependencies
       uses: asdf-vm/actions/install@v1
     - name: Import Docker registry creds from Vault
@@ -72,10 +77,7 @@ jobs:
         VAULT_TOKEN: ${{ secrets.VAULT_TOKEN }}
       run: |
         export DOCKER_PASSWORD=$(vault kv get  -format=json vmware-demo/docker-registry | jq ".data.DOCKER_PASSWORD")
-        export DOCKER_USERNAME=$( vault kv get  -format=json vmware-demo/docker-registry | jq ".data.DOCKER_USERNAME")       
-         
-    - name: Check out code
-      uses: actions/checkout@v2 
+        export DOCKER_USERNAME=$( vault kv get  -format=json vmware-demo/docker-registry | jq ".data.DOCKER_USERNAME") 
     - name: Build and push Docker image
       uses: docker/build-push-action@v1.1.0
       with:
