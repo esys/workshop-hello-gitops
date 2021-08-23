@@ -120,6 +120,8 @@ jobs:
        cd kustomize/base
        kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
        cat kustomization.yaml
+       sed -i "s/__NAME__/development/" workshop-hello-gitops/kustomize/base/kustomization.yaml
+
         
     - name: Commit files
       run: |
@@ -148,6 +150,27 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: kustomize/base
+      - name: Update Kubernetes resources
+        env:
+          DOCKER_USERNAME: pkatira7
+        run: |
+            cd kustomize/base
+            kustomize edit set image hello-gitops=${{DOCKER_USERNAME}}/hello-gitops:$GITHUB_SHA
+            cat kustomization.yaml
+            sed -i "s/development/production/" workshop-hello-gitops/kustomize/base/kustomization.yaml
+
+        
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "Bump docker tag $GITHUB_SHA"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           branch: ${{ github.ref }}
 
     
 
