@@ -37,7 +37,7 @@ jobs:
         VALIDATE_MARKDOWN: false
         VALIDATE_GO: false
         GITHUB_TOKEN: ${{secrets.secret_token}}
-        SHELLCHECK_OPTS: "-e SC2086,-e SC2046"
+        SHELLCHECK_OPTS: "-e SC2086 -e SC2046"
   
           # GOENV: "/home/runner/.config/go/env"
           # GOROOT: "/opt/hostedtoolcache/go/1.16.7/x64"
