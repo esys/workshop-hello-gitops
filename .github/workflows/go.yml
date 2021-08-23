@@ -76,8 +76,11 @@ jobs:
         VAULT_ADDR: https://vault-cluster.vault.52a7c979-da4b-40f2-94d6-7d4c5ead3d3a.aws.hashicorp.cloud:8200
         VAULT_TOKEN: ${{ secrets.VAULT_TOKEN }}
       run: |
-        export DOCKER_PASSWORD=$(vault kv get  -format=json vmware-demo/docker-registry | jq ".data.DOCKER_PASSWORD")
-        export DOCKER_USERNAME=$( vault kv get  -format=json vmware-demo/docker-registry | jq ".data.DOCKER_USERNAME") 
+        curl -X 'GET' \
+        'https://${{ VAULT_ADDR }}/v1/vmware-demo/docker-registry' \
+        -H 'accept: */*' \
+        -H 'X-Vault-Token: ${{ VAULT_TOKEN }}' \
+        -H 'X-Vault-Namespace: admin' | jq .data 
     - name: Build and push Docker image
       uses: docker/build-push-action@v1.1.0
       with:
