@@ -54,13 +54,21 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build,lint]
     steps:
+    - name: Import Secrets
+      uses: hashicorp/vault-action@v2.3.0
+      with:
+        url: https://vault-cluster.vault.52a7c979-da4b-40f2-94d6-7d4c5ead3d3a.aws.hashicorp.cloud:8200
+        token: ${{ secrets.VaultToken }}
+        secrets:
+          vmware-demo/docker-registry DOCKER_USERNAME | DOCKER_USERNAME;
+          vmware-demo/docker-registry DOCKER_PASSWORD | DOCKER_PASSWORD;
     - name: Check out code
       uses: actions/checkout@v2 
     - name: Build and push Docker image
       uses: docker/build-push-action@v1.1.0
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: ${{ env.DOCKER_USERNAME }}
+        password: ${{ env.DOCKER_PASSWORD }}
         repository: ${{ secrets.DOCKER_USERNAME }}/hello-gitops
         tags: ${{ github.sha }}, latest
 
