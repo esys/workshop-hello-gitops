@@ -157,8 +157,8 @@ jobs:
     needs: deploy
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
-      # - name: Checkout Code
-      #   uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
       # - name: Run Checkov scan
       #   id: checkov
       #   uses: bridgecrewio/checkov-action@master
