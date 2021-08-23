@@ -3,8 +3,8 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
-namespace: __NAME__
+namespace: development
 images:
 - name: hello-gitops
   newName: /hello-gitops
-  newTag: ea190ed53647f9541274d1a874c0d700c179dc3b
+  newTag: cf3975e10ca2842b5f4b80f5c038ad755994428c
