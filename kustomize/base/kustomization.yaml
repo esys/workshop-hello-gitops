@@ -6,5 +6,5 @@ resources:
 namespace: __NAME__
 images:
 - name: hello-gitops
-  newName: pkatira7/hello-gitops
-  newTag: 0cc335018e83c65a6d2bd4b2e4049e082dd38ab3
+  newName: /hello-gitops
+  newTag: ea190ed53647f9541274d1a874c0d700c179dc3b
