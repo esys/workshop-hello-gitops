@@ -61,8 +61,8 @@ jobs:
         token: ${{ secrets.VAULT_TOKEN }}
         #path: vmware-demo
         secrets: |
-          secrets/vmware-demo/docker-registry DOCKER_USERNAME | DOCKER_USERNAME ;
-          secrets/vmware-demo/docker-registry DOCKER_PASSWORD | DOCKER_PASSWORD ;
+          secret/vmware-demo/docker-registry DOCKER_USERNAME | DOCKER_USERNAME ;
+          secret/vmware-demo/docker-registry DOCKER_PASSWORD | DOCKER_PASSWORD ;
         tlsSkipVerify: true
     - name: Check out code
       uses: actions/checkout@v2 
