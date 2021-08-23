@@ -81,12 +81,12 @@ jobs:
         '${{ env.VAULT_ADDR }}/v1/vmware-demo/docker-registry' \
         -H 'accept: */*' \
         -H 'X-Vault-Token: ${{ env.VAULT_TOKEN }}' \
-        -H 'X-Vault-Namespace: admin' | jq .data.DOCKER_PASSWORD)
+        -H 'X-Vault-Namespace: admin' | jq -r .data.DOCKER_PASSWORD)
         echo ::set-output name=DOCKER_USERNAME::$(curl -X 'GET' \
         '${{ env.VAULT_ADDR }}/v1/vmware-demo/docker-registry' \
         -H 'accept: */*' \
         -H 'X-Vault-Token: ${{ env.VAULT_TOKEN }}' \
-        -H 'X-Vault-Namespace: admin' | jq .data.DOCKER_USERNAME)
+        -H 'X-Vault-Namespace: admin' | jq -r .data.DOCKER_USERNAME)
     - name: Get docker username
       run: |
         echo "docker username  is ${{steps.creds.outputs.DOCKER_USERNAME}}" 
