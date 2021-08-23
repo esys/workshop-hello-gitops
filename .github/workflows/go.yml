@@ -58,7 +58,7 @@ jobs:
       uses: hashicorp/vault-action@v2.3.0
       with:
         url: https://vault-cluster.vault.52a7c979-da4b-40f2-94d6-7d4c5ead3d3a.aws.hashicorp.cloud:8200
-        token: ${{ secrets.VAULTTOKEN }}
+        token: ${{ secrets.VAULT_TOKEN }}
         secrets:
           vmware-demo/docker-registry DOCKER_USERNAME | DOCKER_USERNAME;
           vmware-demo/docker-registry DOCKER_PASSWORD | DOCKER_PASSWORD;
