@@ -7,4 +7,4 @@ namespace: production
 images:
 - name: hello-gitops
   newName: /hello-gitops
-  newTag: 31c7b90abee1c4a9fddc6b4c5001fcd078fe1a55
+  newTag: 35c7611fd4d812f886f26aaa97df7845196a9b63
