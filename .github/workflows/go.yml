@@ -91,7 +91,7 @@ jobs:
       with:
         username: ${{ env.DOCKER_USERNAME }}
         password: ${{ env.DOCKER_PASSWORD }}
-        repository: ${{ secrets.DOCKER_USERNAME }}/hello-gitops
+        repository: ${{ env.DOCKER_USERNAME }}/hello-gitops
         tags: ${{ github.sha }}, latest
 
   deploy:
