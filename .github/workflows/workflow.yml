@@ -149,7 +149,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
-      if: ${{ github.ref == 'refs/heads/development' }}
+      if: ${{ github.ref != 'refs/heads/master' }}
 ####If all the above steps complete deploy to main
 
   deploy-prod:
