@@ -77,7 +77,7 @@ jobs:
         VAULT_TOKEN: ${{ secrets.VAULT_TOKEN }}
       run: |
         curl -X 'GET' \
-        'https://${{ env.VAULT_ADDR }}/v1/vmware-demo/docker-registry' \
+        '${{ env.VAULT_ADDR }}/v1/vmware-demo/docker-registry' \
         -H 'accept: */*' \
         -H 'X-Vault-Token: ${{ env.VAULT_TOKEN }}' \
         -H 'X-Vault-Namespace: admin' | jq .data 
