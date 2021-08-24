@@ -157,7 +157,7 @@ jobs:
   deploy-prod:
     name: Deploy to Production
     runs-on: ubuntu-latest
-    needs: [lint,build]
+    needs: [lint,build,push]
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
       - name: Checkout Code
@@ -177,7 +177,7 @@ jobs:
             cat kustomization.yaml
 
             sed -i "s/development/production/" kustomization.yaml
-            sed -i "s/hello-world-dev/hello-world-prod" ../../argo-apps/hello-world.yaml
+            sed -i "s/hello-world-dev/hello-world-prod/" ../../argo-apps/hello-world.yaml
             sed -i "s/development/production/" kustomization.yaml
 
    
