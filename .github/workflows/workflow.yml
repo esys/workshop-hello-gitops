@@ -179,7 +179,7 @@ jobs:
             sed -i "s/development/production/" kustomization.yaml
             sed -i "s/hello-world-dev/hello-world-prod/" ../../argo-apps/hello-world.yaml
             sed -i "s/development/production/" kustomization.yaml
-            sed -i "s/development/production/" ../../argo-apps/hello-world.yaml
+            sed -i "s/development/master/" ../../argo-apps/hello-world.yaml
 
    
       - name: Commit files
