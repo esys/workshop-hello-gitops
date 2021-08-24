@@ -137,7 +137,11 @@ jobs:
        cd kustomize/base
        kustomize edit set image hello-gitops=${{env.DOCKER_USERNAME}}/hello-gitops:$GITHUB_SHA
        cat kustomization.yaml
-       sed -i "s/__NAME__/development/" kustomization.yaml
+       sed -i "s/production/development/" kustomization.yaml
+       sed -i "s/hello-world-prod/hello-world-dev/" ../../argo-apps/hello-world.yaml
+       sed -i "s/production/development/" kustomization.yaml
+       sed -i "s/master/development/" ../../argo-apps/hello-world.yaml
+
       
         
     - name: Commit files
