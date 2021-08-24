@@ -113,13 +113,13 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
     
-    - name: Run Checkov scan
-      id: checkov
-      uses: bridgecrewio/checkov-action@master
-      with:
-        directory: kustomize/base
-        skip_check: CKV_K8S_21
-      if: ${{ github.ref != 'refs/heads/master' }}
+    # - name: Run Checkov scan
+    #   id: checkov
+    #   uses: bridgecrewio/checkov-action@master
+    #   with:
+    #     directory: kustomize/base
+    #     skip_check: CKV_K8S_21
+    #   if: ${{ github.ref != 'refs/heads/master' }}
       
 
     - name: Setup Kustomize
@@ -173,7 +173,7 @@ jobs:
             cat kustomization.yaml
             sed -i "s/development/production/" workshop-hello-gitops/kustomize/base/kustomization.yaml
             sed -i "s/hello-world-dev/hello-world-prod" ../../argo-apps/hello-world.yaml
-            
+
 
    
       - name: Commit files
