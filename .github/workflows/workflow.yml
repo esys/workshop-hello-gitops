@@ -21,13 +21,13 @@ jobs:
     - name: Check Path
       run: echo $PATH 
 
-  # lint:
-  #   name: lint
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   steps:
-  #   - name: Check out code
-  #     uses: actions/checkout@v2
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
   #   # - name: Lint Code Base
   #   #   uses: github/super-linter@v4
   #   #   env:
