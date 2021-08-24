@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hello-world-prod
+  name: hello-world-dev
   namespace: argocd
 spec:
   project: default
