@@ -170,8 +170,9 @@ jobs:
         env:
           DOCKER_USERNAME: pkatira7
         run: |
+            echo $GITHUB_SHA
             cd kustomize/base
-            kustomize edit set image hello-gitops=${{env.DOCKER_USERNAME}}/hello-gitops:$GITHUB_SHA
+            kustomize edit set image hello-gitops=${DOCKER_USERNAME}/hello-gitops:$GITHUB_SHA
             cat kustomization.yaml
 
             sed -i "s/development/production/" workshop-hello-gitops/kustomize/base/kustomization.yaml
