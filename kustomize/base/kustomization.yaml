@@ -6,5 +6,5 @@ resources:
 namespace: development
 images:
 - name: hello-gitops
-  newName: /hello-gitops
-  newTag: fbf0dc82c82e48a2dfc9b633404b4501fa175d50
+  newName: pkatira7/hello-gitops
+  newTag: 88dd9bdd7ceb926cc9c05d302456e063f7ba46ab
