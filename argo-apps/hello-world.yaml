@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    targetRevision: production
+    targetRevision: master
     repoURL: https://github.com/piyush7/workshop-hello-gitops
     path: kustomize/base
   destination:
