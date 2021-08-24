@@ -28,16 +28,16 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v2
-    - name: Lint Code Base
-      uses: github/super-linter@v4
-      env:
-        DEFAULT_BRANCH: master
-        VALIDATE_KUBERNETES_KUBEVAL: false
-          #  VALIDATE_JSCPD: false
-        VALIDATE_MARKDOWN: false
-        VALIDATE_GO: false
-        GITHUB_TOKEN: ${{secrets.secret_token}}
-        SHELLCHECK_OPTS: "-e SC2086 -e SC2046"
+  #   # - name: Lint Code Base
+  #   #   uses: github/super-linter@v4
+  #   #   env:
+  #   #     DEFAULT_BRANCH: master
+  #   #     VALIDATE_KUBERNETES_KUBEVAL: false
+  #   #       #  VALIDATE_JSCPD: false
+  #   #     VALIDATE_MARKDOWN: false
+  #   #     VALIDATE_GO: false
+  #   #     GITHUB_TOKEN: ${{secrets.secret_token}}
+  #   #     SHELLCHECK_OPTS: "-e SC2086 -e SC2046"
   
           # GOENV: "/home/runner/.config/go/env"
           # GOROOT: "/opt/hostedtoolcache/go/1.16.7/x64"
@@ -108,7 +108,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     needs: [build,lint,push]
-
+    if: ${{ github.ref != 'refs/heads/master' }}
     steps:
   
 
@@ -131,27 +131,27 @@ jobs:
 
     - name: Update Kubernetes resources
       env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_USERNAME: pkatira7
       run: |
+       echo $GITHUB_SHA
        cd kustomize/base
-       kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
+       kustomize edit set image hello-gitops=${{env.DOCKER_USERNAME}}/hello-gitops:$GITHUB_SHA
        cat kustomization.yaml
        sed -i "s/__NAME__/development/" kustomization.yaml
-
+      
         
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -am "Bump docker tag"
-      
+
 
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
-      if: ${{ github.ref != 'refs/heads/master' }}
 ####If all the above steps complete deploy to main
 
   deploy-prod:
@@ -171,8 +171,9 @@ jobs:
         env:
           DOCKER_USERNAME: pkatira7
         run: |
+            echo $GITHUB_SHA
             cd kustomize/base
-            kustomize edit set image hello-gitops=${{env.DOCKER_USERNAME}}/hello-gitops:$GITHUB_SHA
+            kustomize edit set image hello-gitops=${DOCKER_USERNAME}/hello-gitops:$GITHUB_SHA
             cat kustomization.yaml
 
             sed -i "s/development/production/" workshop-hello-gitops/kustomize/base/kustomization.yaml
