@@ -7,4 +7,4 @@ namespace: development
 images:
 - name: hello-gitops
   newName: /hello-gitops
-  newTag: f4eeda7616e59085cffdc5a598995b64163386f7
+  newTag: 32ab6409e37354660a7b3f13cee11bb8d518cce3
