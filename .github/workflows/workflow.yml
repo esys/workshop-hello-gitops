@@ -26,6 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+    - name: Check out code
+      uses: actions/checkout@v2
     - name: Lint Code Base
       uses: github/super-linter@v4
       env:
@@ -35,7 +37,7 @@ jobs:
         VALIDATE_MARKDOWN: false
         VALIDATE_GO: false
         GITHUB_TOKEN: ${{secrets.secret_token}}
-        SHELLCHECK_OPTS: "-e SC2086"
+        SHELLCHECK_OPTS: "-e SC2086 -e SC2046"
   
           # GOENV: "/home/runner/.config/go/env"
           # GOROOT: "/opt/hostedtoolcache/go/1.16.7/x64"
@@ -78,15 +80,15 @@ jobs:
         VAULT_TOKEN: ${{ secrets.VAULT_TOKEN }}
       run: |
         echo ::set-output name=DOCKER_PASSWORD::$(curl -X 'GET' \
-        '${{ env.VAULT_ADDR }}/v1/vmware-demo/docker-registry' \
+        '${{env.VAULT_ADDR}}/v1/vmware-demo/docker-registry' \
         -H 'accept: */*' \
-        -H 'X-Vault-Token: ${{ env.VAULT_TOKEN }}' \
+        -H 'X-Vault-Token: ${{env.VAULT_TOKEN}}' \
         -H 'X-Vault-Namespace: admin' | jq -r .data.DOCKER_PASSWORD)
         echo ::set-output name=DOCKER_USERNAME::$(curl -X 'GET' \
-        '${{ env.VAULT_ADDR }}/v1/vmware-demo/docker-registry' \
+        '${{env.VAULT_ADDR}}/v1/vmware-demo/docker-registry' \
         -H 'accept: */*' \
-        -H 'X-Vault-Token: ${{ env.VAULT_TOKEN }}' \
-        -H 'X-Vault-Namespace: admin' | jq -r .data.DOCKER_USERNAME)
+        -H 'X-Vault-Token: ${{env.VAULT_TOKEN}}' \
+        -H 'X-Vault-Namespace: admin'|jq -r .data.DOCKER_USERNAME)
     - name: Get docker username
       run: |
         echo "docker username  is ${{steps.creds.outputs.DOCKER_USERNAME}}" 
@@ -149,6 +151,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
+      if: ${{ github.ref != 'refs/heads/master' }}
 ####If all the above steps complete deploy to main
 
   deploy-prod:
@@ -157,8 +160,8 @@ jobs:
     needs: deploy
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
-      # - name: Checkout Code
-      #   uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
       # - name: Run Checkov scan
       #   id: checkov
       #   uses: bridgecrewio/checkov-action@master
@@ -171,9 +174,10 @@ jobs:
             cd kustomize/base
             kustomize edit set image hello-gitops=${{env.DOCKER_USERNAME}}/hello-gitops:$GITHUB_SHA
             cat kustomization.yaml
+
             sed -i "s/development/production/" workshop-hello-gitops/kustomize/base/kustomization.yaml
             sed -i "s/hello-world-dev/hello-world-prod" ../../argo-apps/hello-world.yaml
-
+            sed -i "s/development/production/" kustomization.yaml
 
    
       - name: Commit files
