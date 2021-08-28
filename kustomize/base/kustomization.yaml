@@ -3,8 +3,8 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
-namespace: development
+namespace: production
 images:
 - name: hello-gitops
   newName: pkatira7/hello-gitops
-  newTag: 5667bf493485f9be1b9d53047096164effc8bf03
+  newTag: aef1920d5e593690d48d42b4447356aa916f8710
