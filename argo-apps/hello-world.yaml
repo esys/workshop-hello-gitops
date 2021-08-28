@@ -11,3 +11,8 @@ spec:
     path: kustomize/base
   destination:
     server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+    syncOptions:
+    - replace=true
+    - force=true
