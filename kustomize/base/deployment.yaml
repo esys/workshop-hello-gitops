@@ -14,7 +14,7 @@ spec:
       labels:
         app: hello-gitops
       annotations:
-        seccomp.security.kubernetes.io/pod: "runtime/default"
+        seccomp.security.kubernetes.io/pod: "docker/default"
     spec:
       securityContext:
         runAsNonRoot: true
@@ -27,7 +27,12 @@ spec:
             containerPort: 8080
         securityContext:
           allowPrivilegeEscalation: false
-
+          readOnlyRootFilesystem: true
+        resources:
+          requests:
++           memory: 256Mi
+          limits:
+            cpu: 0.5
       automountServiceAccountToken: false
       imagePullSecrets:
       - name: my-registry-creds
