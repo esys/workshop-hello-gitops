@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hello-world-dev
+  name: hello-world-prod
   namespace: argocd
 spec:
   project: default
   source:
-    targetRevision: development
+    targetRevision: master
     repoURL: https://github.com/piyush7/workshop-hello-gitops
     path: kustomize/base
   destination:
