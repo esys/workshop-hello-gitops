@@ -27,10 +27,11 @@ spec:
             containerPort: 8080
         securityContext:
           allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
         resources:
           requests:
             cpu: "250m"
-+           memory: "256Mi"
+            memory: "256Mi"
           limits:
             memory: "512Mi"
             cpu: "500m"
