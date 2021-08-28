@@ -14,7 +14,7 @@ spec:
       labels:
         app: hello-gitops
       annotations:
-        seccomp.security.kubernetes.io/pod: "runtime/default"
+        seccomp.security.kubernetes.io/pod: "docker/default"
     spec:
       securityContext:
         runAsNonRoot: true
@@ -27,6 +27,28 @@ spec:
             containerPort: 8080
         securityContext:
           allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+              - ALL
+              - NET_RAW
+
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
 
       automountServiceAccountToken: false
       imagePullSecrets:
