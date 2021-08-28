@@ -8,3 +8,4 @@ images:
 - name: hello-gitops
   newName: pkatira7/hello-gitops
   newTag: 0075a291a564fa8f2f43d179b3dfc8b19e9fd037
+
