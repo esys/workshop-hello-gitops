@@ -29,9 +29,9 @@ spec:
           allowPrivilegeEscalation: false
         resources:
           requests:
-+           memory: 256Mi
++           memory: "256Mi"
           limits:
-            cpu: 500m
+            cpu: "500m"
       automountServiceAccountToken: false
       imagePullSecrets:
       - name: my-registry-creds
