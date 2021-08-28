@@ -27,11 +27,13 @@ spec:
             containerPort: 8080
         securityContext:
           allowPrivilegeEscalation: false
-#         resources:
-#           requests:
-# +           memory: "256Mi"
-#           limits:
-#             cpu: "500m"
+        resources:
+          requests:
+            cpu: "250m"
++           memory: "256Mi"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
       automountServiceAccountToken: false
       imagePullSecrets:
       - name: my-registry-creds
