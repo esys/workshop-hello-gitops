@@ -32,7 +32,7 @@ spec:
           requests:
 +           memory: 256Mi
           limits:
-            cpu: 0.5
+            cpu: 500m
       automountServiceAccountToken: false
       imagePullSecrets:
       - name: my-registry-creds
