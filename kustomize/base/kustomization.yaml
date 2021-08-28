@@ -7,4 +7,5 @@ namespace: production
 images:
 - name: hello-gitops
   newName: pkatira7/hello-gitops
-  newTag: aef1920d5e593690d48d42b4447356aa916f8710
+  newTag: 2f1fc2fe3bc706bf48823deb3f17b31735b6a366
+
