@@ -101,6 +101,10 @@ jobs:
         repository: ${{ steps.creds.outputs.DOCKER_USERNAME }}/hello-gitops
         tags: ${{ github.sha }}, latest
 
+    - name: Scan image
+      uses: azure/container-scan@v0
+      with:
+        image-name: ${{ steps.creds.outputs.DOCKER_USERNAME }}/hello-gitops:latest
   deploy:
     
 
