@@ -36,9 +36,14 @@ spec:
             memory: "512Mi"
             cpu: "500m"
         livenessProbe:
-        httpGet:
-          path: /
-          port: 80
+          httpGet:
+            path: /
+            port: 8080
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
 
       automountServiceAccountToken: false
       imagePullSecrets:
