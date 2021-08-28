@@ -150,7 +150,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -am "Bump docker tag"
+        git commit -am "Image version: $GITHUB_SHA "
 
 
     - name: Push changes
@@ -191,7 +191,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -am "Bump docker tag $GITHUB_SHA"
+          git commit -am "Image version: $GITHUB_SHA"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
