@@ -25,12 +25,7 @@ func handler(w http.ResponseWriter, r *http.Request){
 	if err != nil {
 		log.Printf("unknown host")
 	}
-<<<<<<< Updated upstream
-	resp := fmt.Sprintf("Hello  to Salvatore and Zahoor from Piyush!",)
-
-=======
-	resp := fmt.Sprintf("Hello  to awesome VMware Tanzu team from Piyush!",)
->>>>>>> Stashed changes
+	resp := fmt.Sprintf("Hello  to VMware tanzu folks from Piyush",)
 	_, err = w.Write([]byte(resp))
 	if err != nil {
 		log.Panicf("not able to write http output: %s", err)
