@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 changes from infovein
+=======
+changes from sreekanth.bg
+>>>>>>> 9cd838f (changes from sreekanth.bg)
