@@ -19,6 +19,6 @@ spec:
           name: hello-gitops
           ports:
             - name: http
-              containerPort: 8080
-      imagePullSecrets:
-      - name: registry-esys
+      #         containerPort: 8080
+      # imagePullSecrets:
+      # - name: registry-esys
