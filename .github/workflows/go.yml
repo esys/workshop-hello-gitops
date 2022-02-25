@@ -56,10 +56,10 @@ jobs:
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
-        git config --local user.name "Erik GitHub Action"
+        git config --local user.name "ErikGitHub Action"
         git commit -am "Bump docker tag"
 
     - name: Push changes
       uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      # with:
+      #   github_token: ${{ secrets.GITHUB_TOKEN }}

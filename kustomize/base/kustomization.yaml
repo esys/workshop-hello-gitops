@@ -4,7 +4,7 @@ resources:
 - deployment.yaml
 - service.yaml
 - ingress.yaml
-namespace: hello-gitops
+# namespace: hello-gitops
 images:
 - name: hello-gitops
   newName: ericnjin/hello-gitops
