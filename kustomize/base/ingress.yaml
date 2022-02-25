@@ -12,4 +12,4 @@ spec:
               service:
                 name: hello-gitops
                 port:
-                  number: 8080
+                  number: http
