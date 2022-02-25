@@ -11,4 +11,5 @@ spec:
       targetPort: http
   selector:
     app: hello-gitops
-  type: ClusterIP
+  # type: ClusterIP
+  type: NodePort
