@@ -8,4 +8,4 @@ resources:
 images:
 - name: hello-gitops
   newName: ericnjin/hello-gitops
-  newTag: a85c10b390216ea12419d91e794828ac9974973a
+  newTag: 32d56779374c36f463a1b3f94d8c93bdadc117e4
