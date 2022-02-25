@@ -42,8 +42,8 @@ jobs:
 
     - name: Setup Kustomize
       uses: imranismail/setup-kustomize@v1
-      with:
-        kustomize-version: "3.6.1"
+      # with:
+      #   kustomize-version: "3.6.1"
 
     - name: Update Kubernetes resources
       env:
@@ -61,5 +61,5 @@ jobs:
 
     - name: Push changes
       uses: ad-m/github-push-action@master
-      # with:
-      #   github_token: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
