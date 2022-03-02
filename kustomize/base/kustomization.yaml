@@ -9,5 +9,7 @@ resources:
 images:
 - name: /
   newName: /
+- name: erik-test
+  newName: /
 - name: hello-gitops
   newName: /
