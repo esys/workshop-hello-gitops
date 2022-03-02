@@ -7,5 +7,4 @@ resources:
 # namespace: hello-gitops
 images:
 - name: hello-gitops
-  newName: ericnjin/hello-gitops
-  newTag: 8e402143372da4a6053f7109e28475acaec2415d
+  newName: /
