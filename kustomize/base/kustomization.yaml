@@ -8,4 +8,4 @@ resources:
   # newName: hello-gitops
 images:
 - name: hello-gitops
-  newTag: ed86e46d700b341e856a7942c6273c248b403e20
+  newName: hello-gitops
