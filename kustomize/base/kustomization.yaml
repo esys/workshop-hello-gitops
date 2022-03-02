@@ -5,8 +5,7 @@ resources:
 - service.yaml
 - ingress.yaml
 # namespace: hello-gitops
+  # newName: hello-gitops
 images:
 - name: hello-gitops
-  # newName: hello-gitops
-  newTag: ed86e46d700b341e856a7942c6273c248b403e20
-
+  newName: /
