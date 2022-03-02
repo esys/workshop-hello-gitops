@@ -83,7 +83,7 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
        cd kustomize/base
-       kustomize edit set image hello-gitops=$IMAGE_TAG
+       kustomize edit set image hello-gitops:$IMAGE_TAG
        cat kustomization.yaml
       #  kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
       # kustomize edit set image hello-gitops=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
