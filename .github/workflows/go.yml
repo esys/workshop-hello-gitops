@@ -64,36 +64,36 @@ jobs:
 
 
 
-  # deploy:
-  #   name: Deploy
-  #   runs-on: ubuntu-latest
-  #   needs: build
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build
 
-  #   steps:
-  #   - name: Check out code
-  #     uses: actions/checkout@v2
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
 
-  #   - name: Setup Kustomize
-  #     uses: imranismail/setup-kustomize@v1
-  #     # with:
-  #     #   kustomize-version: "3.6.1"
+    - name: Setup Kustomize
+      uses: imranismail/setup-kustomize@v1
+      # with:
+      #   kustomize-version: "3.6.1"
 
-  #   - name: Update Kubernetes resources
-  #     env:
-  #       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  #     run: |
-  #      cd kustomize/base
-  #      kustomize edit set image hello-gitops=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-  #      cat kustomization.yaml
-  #     #  kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
+    - name: Update Kubernetes resources
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      run: |
+       cd kustomize/base
+       kustomize edit set image hello-gitops=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+       cat kustomization.yaml
+      #  kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
         
-  #   - name: Commit files
-  #     run: |
-  #       git config --local user.email "action@github.com"
-  #       git config --local user.name "ErikGitHub Action"
-  #       git commit -am "Bump docker tag"
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "Erik GitHub Action"
+        git commit -am "Bump docker tag"
 
-  #   - name: Push changes
-  #     uses: ad-m/github-push-action@master
-  #     # with:
-  #     #   github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      # with:
+      #   github_token: ${{ secrets.GITHUB_TOKEN }}
