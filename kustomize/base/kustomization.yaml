@@ -8,4 +8,4 @@ resources:
   # newName: hello-gitops
 images:
 - name: hello-gitops
-  newName: hello-gitops
+  newName: /
