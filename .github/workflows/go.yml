@@ -82,17 +82,12 @@ jobs:
       
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ${{ secrets.REPO_NAME }}
-        # IMAGE_TAG: 1.0
         IMAGE_TAG: ${{ github.sha }}
         
       run: |
-       echo "ECR_REGISTRY : $ECR_REGISTRY"
-       echo "ECR_REPOSITORY : $ECR_REPOSITORY"
        echo "IMAGE_TAG : $IMAGE_TAG"
        cd kustomize/base
-       kustomize edit set image myimage=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+       kustomize edit set image myimage=600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test:$IMAGE_TAG
        cat kustomization.yaml
       #  kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
       # kustomize edit set image myimage=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
