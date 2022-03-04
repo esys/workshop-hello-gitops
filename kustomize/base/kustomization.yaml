@@ -7,5 +7,7 @@ resources:
 images:
 - name: myimage
   newTag: asd
+  newName: 600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test
+   
 
   
