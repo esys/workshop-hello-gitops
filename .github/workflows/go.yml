@@ -89,11 +89,7 @@ jobs:
        cd kustomize/base
        kustomize edit set image myimage=600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test:$IMAGE_TAG
        cat kustomization.yaml
-      #  kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
-      # kustomize edit set image myimage=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      #  kustomize edit set image 600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test:latest
-      #  kustomize edit set image $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        
+              
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
