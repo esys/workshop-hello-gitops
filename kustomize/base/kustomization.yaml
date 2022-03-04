@@ -7,5 +7,4 @@ resources:
 images:
 - name: 600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test
   newTag: ed86e46d700b341e856a7942c6273c248b403e20
-- name: hello-gitops
-  newName: /
+
