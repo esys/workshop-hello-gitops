@@ -15,7 +15,7 @@ spec:
         app: hello-gitops
     spec:
       containers:
-        - image: hello-gitops
+        - image: ericnjin/hello-gitops:latest
           name: hello-gitops
           ports:
             - name: http
