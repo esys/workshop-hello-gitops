@@ -79,9 +79,12 @@ jobs:
       #   kustomize-version: "3.6.1"
 
     - name: Update Kubernetes resources
+      
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        IMAGE_TAG: ${{ github.sha }}
       run: |
+       IMAGE_TAG: ${{ github.sha }}
        echo "ECR_REGISTRY : $ECR_REGISTRY"
        echo "ECR_REPOSITORY : $ECR_REPOSITORY"
        echo "IMAGE_TAG : $IMAGE_TAG"
