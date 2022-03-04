@@ -83,6 +83,8 @@ jobs:
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         IMAGE_TAG: ${{ github.sha }}
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: ${{ secrets.REPO_NAME }}
       run: |
        IMAGE_TAG: ${{ github.sha }}
        echo "ECR_REGISTRY : $ECR_REGISTRY"
