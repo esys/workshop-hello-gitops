@@ -15,7 +15,8 @@ spec:
         app: hello-gitops
     spec:
       containers:
-        - image: 600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test:latest
+        # - image: 600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test:latest
+        - image: myimage
           name: hello-gitops
           ports:
             - name: http
