@@ -6,8 +6,5 @@ resources:
 - ingress.yaml
 images:
 - name: myimage
-  newTag: asd
   newName: 600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test
-   
-
-  
+  newTag: bd706bed9631fcd98e8d07d3f440bf14129e1494
