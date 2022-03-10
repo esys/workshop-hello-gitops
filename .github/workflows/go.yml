@@ -70,11 +70,24 @@ jobs:
     needs: build
 
     steps:
-    - name: Check out my other private repo
-      uses: actions/checkout@master
+    # - name: Check out my other private repo
+    #   uses: actions/checkout@master
+    #   with:
+    #     repository: ericnjin/manifest-k8s-github-actiopn-test
+    #     token: ${{ secrets.MYGITHUB_TOKEN }}
+    
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+       path: master
+
+    - name: Checkout private tools
+      uses: actions/checkout@v3
       with:
         repository: ericnjin/manifest-k8s-github-actiopn-test
-        token: ${{ secrets.MYGITHUB_TOKEN }}
+        token: ${{ secrets.MYGITHUB_TOKEN }} # `GH_PAT` is a secret that contains your PAT
+        path: master
+
 
     - name: Check out code
       uses: actions/checkout@v2
