@@ -71,7 +71,7 @@ jobs:
 
     steps:
     - name: Check out my other private repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@master
       with:
         repository: ericnjin/manifest-k8s-github-actiopn-test
         token: ${{ secrets.MYGITHUB_TOKEN }}
