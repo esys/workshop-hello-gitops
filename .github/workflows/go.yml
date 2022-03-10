@@ -89,8 +89,8 @@ jobs:
         path: ${{ github.ref }}
 
 
-    # - name: Check out code
-    #   uses: actions/checkout@v2
+    - name: Check out code
+      uses: actions/checkout@v2
 
     - name: Setup Kustomize
       uses: imranismail/setup-kustomize@v1
@@ -111,9 +111,10 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "Erik GitHub Action"
         git commit -a -m "updated the image tag"
+        git push
 
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      # with:
-        # branch: ${{ github.ref }}
-      #   github_token: ${{ secrets.MYGITHUB_TOKEN }}
+    # - name: Push changes
+    #   uses: ad-m/github-push-action@master
+    #   # with:
+    #     # branch: ${{ github.ref }}
+    #   #   github_token: ${{ secrets.MYGITHUB_TOKEN }}
