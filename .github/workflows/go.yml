@@ -96,6 +96,11 @@ jobs:
       uses: imranismail/setup-kustomize@v1
 
     - name: Update Kubernetes resources
+      uses: actions/checkout@v3
+      with:
+        repository: ericnjin/manifest-k8s-github-actiopn-test
+        # token: ${{ secrets.MYGITHUB_TOKEN }} # `GH_PAT` is a secret that contains your PAT
+        path: ${{ github.ref }}
       
       env:
         IMAGE_TAG: ${{ github.sha }}
@@ -103,10 +108,6 @@ jobs:
       run: |
        echo "IMAGE_TAG : $IMAGE_TAG"
        echo "Current Dir : $PWD"
-       git clone git@github.com:ericnjin/manifest-k8s-github-actiopn-test.git
-       git config --global user.email "wittgena@gmail.com"
-       cd manifest-k8s-github-actiopn-test
-       cd mystaging
        cd kustomize/base
        kustomize edit set image myimage=600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test:$IMAGE_TAG
        cat kustomization.yaml
