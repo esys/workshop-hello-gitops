@@ -85,7 +85,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: ericnjin/manifest-k8s-github-actiopn-test
-        token: ${{ secrets.MYGITHUB_TOKEN }} # `GH_PAT` is a secret that contains your PAT
+        # token: ${{ secrets.MYGITHUB_TOKEN }} # `GH_PAT` is a secret that contains your PAT
         path: master
 
 
