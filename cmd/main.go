@@ -25,7 +25,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		host = "unknown host"
 	}
-	resp := fmt.Sprintf("Hello Erik 17 from %s", host)
+	resp := fmt.Sprintf("Hello Erik 18 from %s", host)
 	_, err = w.Write([]byte(resp))
 	if err != nil {
 		log.Panicf("not able to write http output: %s", err)

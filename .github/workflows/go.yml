@@ -102,7 +102,6 @@ jobs:
         
       run: |
        echo "IMAGE_TAG : $IMAGE_TAG"
-       cd manifest-k8s-github-actiopn-test
        cd ${{ github.ref }}
        cd kustomize/base
        kustomize edit set image myimage=600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test:$IMAGE_TAG
