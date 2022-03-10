@@ -89,8 +89,8 @@ jobs:
         path: ${{ github.ref }}
 
 
-    - name: Check out code
-      uses: actions/checkout@v2
+    # - name: Check out code
+    #   uses: actions/checkout@v2
 
     - name: Setup Kustomize
       uses: imranismail/setup-kustomize@v1
