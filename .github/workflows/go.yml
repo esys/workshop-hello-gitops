@@ -70,6 +70,13 @@ jobs:
     needs: build
 
     steps:
+    - name: Check out my other private repo
+      uses: actions/checkout@master
+      with:
+        repository: ericnjin/manifest-k8s-github-actiopn-test
+        token: ${{ secrets.MYGITHUB_TOKEN }}
+        # branch: ${{ github.ref }}
+
     - name: Check out code
       uses: actions/checkout@v2
 
@@ -85,6 +92,8 @@ jobs:
         
       run: |
        echo "IMAGE_TAG : $IMAGE_TAG"
+       cd manifest-k8s-github-actiopn-test
+       cd ${{ github.ref }}
        cd kustomize/base
        kustomize edit set image myimage=600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test:$IMAGE_TAG
        cat kustomization.yaml
@@ -93,10 +102,10 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "Erik GitHub Action"
-        git commit -am "Bump docker tag"
+        git commit -a -m "updated the image tag"
 
     - name: Push changes
       uses: ad-m/github-push-action@master
-      with:
-        branch: ${{ github.ref }}
-      #   github_token: ${{ secrets.GITHUB_TOKEN }}
+      # with:
+        # branch: ${{ github.ref }}
+      #   github_token: ${{ secrets.MYGITHUB_TOKEN }}
