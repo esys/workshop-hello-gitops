@@ -102,6 +102,7 @@ jobs:
         
       run: |
        echo "IMAGE_TAG : $IMAGE_TAG"
+       echo "Current Dir : $PWD"
        cd kustomize/base
        kustomize edit set image myimage=600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test:$IMAGE_TAG
        cat kustomization.yaml
