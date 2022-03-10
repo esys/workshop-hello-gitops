@@ -70,20 +70,18 @@ jobs:
     needs: build
 
     steps:
-    # - name: Check out my other private repo
-    #   uses: actions/checkout@v2
-    #   with:
-    #     repository: ericnjin/manifest-k8s-github-actiopn-test
-    #     # token: ${{ secrets.MYGITHUB_TOKEN }}
-    #     branch: master
+    - name: Check out my other private repo
+      uses: actions/checkout@v2
+      with:
+        repository: ericnjin/manifest-k8s-github-actiopn-test
+        token: ${{ secrets.MYGITHUB_TOKEN }}
+        branch: master
 
     - name: Check out code
       uses: actions/checkout@v2
 
     - name: Setup Kustomize
       uses: imranismail/setup-kustomize@v1
-      # with:
-      #   kustomize-version: "3.6.1"
 
     - name: Update Kubernetes resources
       
@@ -92,7 +90,6 @@ jobs:
         
       run: |
        echo "IMAGE_TAG : $IMAGE_TAG"
-       git clone https://github.com/ericnjin/manifest-k8s-github-actiopn-test.git
        cd manifest-k8s-github-actiopn-test
        cd ${{ github.ref }}
        cd kustomize/base
