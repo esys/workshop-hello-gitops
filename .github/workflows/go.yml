@@ -70,12 +70,12 @@ jobs:
     needs: build
 
     steps:
-    - name: Check out my other private repo
-      uses: actions/checkout@master
-      with:
-        repository: ericnjin/manifest-k8s-github-actiopn-test
-        token: ${{ secrets.MYGITHUB_TOKEN }}
-        # branch: ${{ github.ref }}
+    # - name: Check out my other private repo
+    #   uses: actions/checkout@v2
+    #   with:
+    #     repository: ericnjin/manifest-k8s-github-actiopn-test
+    #     # token: ${{ secrets.MYGITHUB_TOKEN }}
+    #     branch: master
 
     - name: Check out code
       uses: actions/checkout@v2
@@ -92,6 +92,7 @@ jobs:
         
       run: |
        echo "IMAGE_TAG : $IMAGE_TAG"
+       git clone https://github.com/ericnjin/manifest-k8s-github-actiopn-test.git
        cd manifest-k8s-github-actiopn-test
        cd ${{ github.ref }}
        cd kustomize/base
