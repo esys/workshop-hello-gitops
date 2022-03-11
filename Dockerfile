@@ -16,4 +16,4 @@ ADD ./index.html /html
 WORKDIR /html
 EXPOSE 8080
 
-CMD ["http-server", "-p80", "./"]
+CMD ["http-server", "-p8080", "./"]
