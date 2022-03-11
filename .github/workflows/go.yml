@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Set up Go 1.x
-      uses: actions/setup-go@v2
-      with:
-        go-version: ^1.14
+    # - name: Set up Go 1.x
+    #   uses: actions/setup-go@v2
+    #   with:
+    #     go-version: ^1.14
       
     - name: Check out code
       uses: actions/checkout@v2
@@ -70,16 +70,6 @@ jobs:
     needs: build
 
     steps:
-    # - name: Check out my other private repo
-    #   uses: actions/checkout@master
-    #   with:
-    #     repository: ericnjin/manifest-k8s-github-actiopn-test
-    #     token: ${{ secrets.MYGITHUB_TOKEN }}
-    
-
-
-    # - name: Check out code
-    #   uses: actions/checkout@v3
 
     - name: Setup Kustomize
       uses: imranismail/setup-kustomize@v1
@@ -94,11 +84,7 @@ jobs:
 
 
     - name: Update Kubernetes resources
-      # uses: actions/checkout@v3
-      # with:
-      #   repository: ericnjin/manifest-k8s-github-actiopn-test
-      #   # token: ${{ secrets.MYGITHUB_TOKEN }} # `GH_PAT` is a secret that contains your PAT
-      #   path: ${{ github.ref }}
+
       
       env:
         IMAGE_TAG: ${{ github.sha }}
@@ -119,8 +105,3 @@ jobs:
         git commit -am "Update image tag"
         git push
 
-    # - name: Push changes
-    #   uses: ad-m/github-push-action@master
-    #   # with:
-    #     # branch: ${{ github.ref }}
-    #   #   github_token: ${{ secrets.MYGITHUB_TOKEN }}
