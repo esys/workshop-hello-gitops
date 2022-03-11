@@ -89,7 +89,8 @@ jobs:
       with:
         repository: ericnjin/manifest-k8s-github-actiopn-test
         # token: ${{ secrets.MYGITHUB_TOKEN }} # `GH_PAT` is a secret that contains your PAT
-        path: ${{ github.ref }}
+        # path: ${{ github.ref }}
+        path: manifest-k8s-github-actiopn-test
 
 
     - name: Update Kubernetes resources
@@ -100,8 +101,8 @@ jobs:
       #   path: ${{ github.ref }}
       
       env:
-        # IMAGE_TAG: ${{ github.sha }}
-        IMAGE_TAG: $(echo ${{ github.sha }} | cut -c1-8)
+        IMAGE_TAG: ${{ github.sha }}
+        # IMAGE_TAG: $(echo ${{ github.sha }} | cut -c1-8)
 
       run: |
        echo "IMAGE_TAG : $IMAGE_TAG"
