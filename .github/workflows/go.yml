@@ -78,8 +78,8 @@ jobs:
     
 
 
-    - name: Check out code
-      uses: actions/checkout@v3
+    # - name: Check out code
+    #   uses: actions/checkout@v3
 
     - name: Setup Kustomize
       uses: imranismail/setup-kustomize@v1
