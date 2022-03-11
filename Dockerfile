@@ -14,6 +14,6 @@ RUN set -eux ; \
 ADD ./index.html /html
 
 WORKDIR /html
-EXPOSE 80
+EXPOSE 8080
 
 CMD ["http-server", "-p80", "./"]
