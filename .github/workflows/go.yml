@@ -114,6 +114,7 @@ jobs:
               
     - name: Commit files
       run: |
+        cd manifest-k8s-github-actiopn-test
         git config --global user.email "github-actions@github.com"
         git config --global user.name "github-actions"
         git commit -am "Update image tag"
