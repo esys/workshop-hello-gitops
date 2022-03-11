@@ -76,17 +76,6 @@ jobs:
     #     repository: ericnjin/manifest-k8s-github-actiopn-test
     #     token: ${{ secrets.MYGITHUB_TOKEN }}
     
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-       path: master
-
-    - name: Checkout private tools
-      uses: actions/checkout@v3
-      with:
-        repository: ericnjin/manifest-k8s-github-actiopn-test
-        # token: ${{ secrets.MYGITHUB_TOKEN }} # `GH_PAT` is a secret that contains your PAT
-        path: ${{ github.ref }}
 
 
     - name: Check out code
@@ -95,12 +84,20 @@ jobs:
     - name: Setup Kustomize
       uses: imranismail/setup-kustomize@v1
 
-    - name: Update Kubernetes resources
-      uses: actions/checkout@v3
+    - name: Checkout kustomize repository
+      uses: actions/checkout@v2
       with:
         repository: ericnjin/manifest-k8s-github-actiopn-test
         # token: ${{ secrets.MYGITHUB_TOKEN }} # `GH_PAT` is a secret that contains your PAT
         path: ${{ github.ref }}
+
+
+    - name: Update Kubernetes resources
+      # uses: actions/checkout@v3
+      # with:
+      #   repository: ericnjin/manifest-k8s-github-actiopn-test
+      #   # token: ${{ secrets.MYGITHUB_TOKEN }} # `GH_PAT` is a secret that contains your PAT
+      #   path: ${{ github.ref }}
       
       env:
         IMAGE_TAG: ${{ github.sha }}
@@ -114,9 +111,9 @@ jobs:
               
     - name: Commit files
       run: |
-        git config user.email "action@github.com"
-        git config user.name "Erik GitHub Action"
-        git commit -a -m "updated the image tag"
+        git config --global user.email "github-actions@github.com"
+        git config --global user.name "github-actions"
+        git commit -am "Update image tag"
         git push
 
     # - name: Push changes
