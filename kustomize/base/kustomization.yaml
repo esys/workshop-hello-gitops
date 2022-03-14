@@ -4,8 +4,7 @@ resources:
 - deployment.yaml
 - service.yaml
 - ingress.yaml
-# namespace: hello-gitops
 images:
-- name: hello-gitops
-  newName: ericnjin/hello-gitops
-  newTag: ed86e46d700b341e856a7942c6273c248b403e20
+- name: myimage
+  newName: 600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test
+  newTag: adda5ffb956d0e0835c1a8e46c313c78363e7271

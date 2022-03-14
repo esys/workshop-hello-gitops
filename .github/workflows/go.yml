@@ -2,34 +2,49 @@ name: Go
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, mystaging ]
+  pull_request:
+    branches: [ master, mystaging  ]  
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
     
-    steps:
-    - name: Set up Go 1.x
-      uses: actions/setup-go@v2
-      with:
-        go-version: ^1.14
-      
+    steps:    
     - name: Check out code
       uses: actions/checkout@v2
 
-    # - name: Test
-    #   run: |
-    #     CGO_ENABLED=0 go test ./...
-        
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v1.1.0
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: ${{ secrets.DOCKER_USERNAME }}/hello-gitops
-        # tags: ${{ github.sha }}, latest
-        tags: ${{ github.sha }}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-2
+      
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build, tag, and push the image to Amazon ECR
+      id: build-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: ${{ secrets.REPO_NAME }}
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        # Build a docker container and push it to ECR
+        echo "ECR_REGISTRY : $ECR_REGISTRY"
+        echo "ECR_REPOSITORY : $ECR_REPOSITORY"
+        echo "IMAGE_TAG : $IMAGE_TAG"
+
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        echo "Pushing image to ECR..."
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+
 
   deploy:
     name: Deploy
@@ -37,29 +52,38 @@ jobs:
     needs: build
 
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
 
     - name: Setup Kustomize
       uses: imranismail/setup-kustomize@v1
-      # with:
-      #   kustomize-version: "3.6.1"
+
+    - name: Checkout kustomize repository
+      uses: actions/checkout@v2
+      with:
+        repository: ericnjin/manifest-k8s-github-actiopn-test
+        token: ${{ secrets.MYGITHUB_TOKEN }} # `GH_PAT` is a secret that contains your PAT
+        # path: ${{ github.ref }}
+        path: manifest-k8s-github-actiopn-test
+
 
     - name: Update Kubernetes resources
+
+      
       env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        IMAGE_TAG: ${{ github.sha }}
+        # IMAGE_TAG: $(echo ${{ github.sha }} | cut -c1-8)
+
       run: |
+       echo "IMAGE_TAG : $IMAGE_TAG"
+       cd manifest-k8s-github-actiopn-test/${GITHUB_REF##*/}
        cd kustomize/base
-       kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
+       kustomize edit set image myimage=600086062597.dkr.ecr.ap-northeast-2.amazonaws.com/erik-test:$IMAGE_TAG
        cat kustomization.yaml
-        
+              
     - name: Commit files
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "ErikGitHub Action"
-        git commit -am "Bump docker tag"
+        cd manifest-k8s-github-actiopn-test
+        git config --global user.email "github-actions@github.com"
+        git config --global user.name "github-actions"
+        git commit -am "Update image tag"
+        git push
 
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      # with:
-      #   github_token: ${{ secrets.GITHUB_TOKEN }}

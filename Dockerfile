@@ -1,10 +1,19 @@
-FROM golang:1.14 as build
-WORKDIR /build
-COPY . .
-RUN CGO_ENABLED=0 go build -o hello-gitops cmd/main.go
+FROM node:erbium-buster-slim
 
-FROM alpine:3.12
+LABEL "repository"="https://github.com/teichae/github-action"
+LABEL "maintainer"="tei.chae <tei.chae@kakao.com>"
+
+RUN set -eux ; \
+    apt-get update -y; \
+    apt-get install --no-install-recommends -y \
+    tzdata; \
+    ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime; \
+    mkdir /html; \
+    npm install -g http-server
+
+ADD ./index.html /html
+
+WORKDIR /html
 EXPOSE 8080
-WORKDIR /app
-COPY --from=build /build/hello-gitops .
-CMD ["./hello-gitops"]
+
+CMD ["http-server", "-p8080", "./"]
