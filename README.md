@@ -70,7 +70,7 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 
 Check you have access to the web UI at http://localhost:8080 using your browser
 - Username is `admin`
-- Default password can be retrieved by running `kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2`
+- Default password can be retrieved by running `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
 
 You are of course encouraged to change this password
 
